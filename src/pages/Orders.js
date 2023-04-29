@@ -1,41 +1,48 @@
-import React from 'react'
+import React, { useState } from "react";
+import axios from "axios";
 
+const Orders = () => {
+  const [name, setName] = useState(``); 
+  const [surname, setSurname] = useState(``);
 
+  const handleSubmit = () => {
+    axios
+      .post("https://northwind.vercel.app/api/suppliers", {
+        companyName: name,
+        contactName: surname,
+      })
 
+      .then((response) => {
+        console.log(response.data);
+      });
 
-const Orders = (name,surname) => {
-    function handleSubmit(e){
-        fetch("https://northwind.vercel.app/api/suppliers",{
-            method:"POST",
-            headers: {
-                "Conent-Type" : "application/json"
-            },
-            body: JSON.stringify(
-                {
-                    companyName:name,
-                    contactName:surname,
-                    
-                }),
-        })
-        .then((response) =>response.json())
-        .tehn ((data)=>handleSubmit(data))
-    }
- 
-  return (
-    <div>
-        <form onSubmit={handleSubmit}>
-            <input
-            value={name} onChange={(event)=>(event.target.value)}
-            type='text' placeholder='Enter name'/>
-            <input
-            value={surname} onChange={(event)=>(event.target.value)}
-            type='text' placeholder='Enter surname'/>
-            <button type='submit'> Click me </button>
-           
+    setName("");
+    setSurname("")
+  };
 
-        </form>
-    </div>
-  )
-}
+    return (
+      <div>
+        NAME:
+        <input
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          type="text"
+          placeholder="Enter name"
+        />
+        SURNAME:
+        <input
+          value={surname}
+          onChange={(event) => setSurname(event.target.value)}
+          type="text"
+          placeholder="Enter surname"
+        />
+        ENTER:
+        <button type="submit" onClick={handleSubmit}>
+          {" "}
+          Click me{" "}
+        </button>
+      </div>
+    );
+  };
 
-export default Orders
+export default Orders;

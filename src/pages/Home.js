@@ -21,7 +21,7 @@ const Home = () => {
 
 
   return (
-    <div style={{display: "flex" , justifyContent: "Center" , alignItems: "Center" , gap:50}}>
+    <div style={{display: "flex" , justifyContent: "Space-between" , alignItems: "" , gap:50}}>
         <h3 onClick={goOrders}>Orders</h3>
         <h3 onClick={goCategory}>Category</h3>
     </div>
